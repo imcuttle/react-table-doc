@@ -1,0 +1,207 @@
+{
+  "description": "是多少 哈哈哈哈\n### 666\n- test",
+  "displayName": "Button",
+  "methods": [
+    {
+      "name": "handleClick",
+      "docblock": null,
+      "modifiers": [],
+      "params": [
+        {
+          "name": "e",
+          "type": null
+        }
+      ],
+      "returns": null
+    },
+    {
+      "name": "updateLoadingPosition",
+      "docblock": null,
+      "modifiers": [],
+      "params": [],
+      "returns": null
+    },
+    {
+      "name": "setAsyncLoading",
+      "docblock": null,
+      "modifiers": [],
+      "params": [
+        {
+          "name": "loading",
+          "type": null
+        }
+      ],
+      "returns": null
+    },
+    {
+      "name": "setShowLoading",
+      "docblock": null,
+      "modifiers": [],
+      "params": [
+        {
+          "name": "showLoading",
+          "type": null
+        }
+      ],
+      "returns": null
+    },
+    {
+      "name": "compClass",
+      "docblock": null,
+      "modifiers": [],
+      "params": [],
+      "returns": null
+    },
+    {
+      "name": "loadingIconName",
+      "docblock": null,
+      "modifiers": [],
+      "params": [],
+      "returns": null
+    }
+  ],
+  "props": {
+    "classPrefix": {
+      "type": {
+        "name": "string"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "'erp'",
+        "computed": false
+      }
+    },
+    "type": {
+      "type": {
+        "name": "enum",
+        "value": [
+          {
+            "value": "'default'",
+            "computed": false
+          },
+          {
+            "value": "'primary'",
+            "computed": false
+          },
+          {
+            "value": "'normal'",
+            "computed": false
+          },
+          {
+            "value": "'success'",
+            "computed": false
+          },
+          {
+            "value": "'danger'",
+            "computed": false
+          },
+          {
+            "value": "'pale'",
+            "computed": false
+          },
+          {
+            "value": "'bare'",
+            "computed": false
+          },
+          {
+            "value": "'link'",
+            "computed": false
+          }
+        ]
+      },
+      "required": false,
+      "description": "按钮类型类型 'default' | 'primary' | 'success' | 'danger' | 'normal' | 'pale'\ndefault: 'default'",
+      "defaultValue": {
+        "value": "'default'",
+        "computed": false
+      }
+    },
+    "size": {
+      "type": {
+        "name": "enum",
+        "value": [
+          {
+            "value": "'default'",
+            "computed": false
+          },
+          {
+            "value": "'small'",
+            "computed": false
+          },
+          {
+            "value": "'large'",
+            "computed": false
+          },
+          {
+            "value": "'x-small'",
+            "computed": false
+          }
+        ]
+      },
+      "required": false,
+      "description": "尺寸 'default' | 'small' | 'x-small' | 'large'\n实际没有large，因为规范上没有定义\ndefault: 'default'",
+      "defaultValue": {
+        "value": "'default'",
+        "computed": false
+      }
+    },
+    "icon": {
+      "type": {
+        "name": "string"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "''",
+        "computed": false
+      }
+    },
+    "disabled": {
+      "type": {
+        "name": "bool"
+      },
+      "required": false,
+      "description": ""
+    },
+    "loading": {
+      "type": {
+        "name": "bool"
+      },
+      "required": false,
+      "description": ""
+    },
+    "loadingSpinDelayInMS": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "300",
+        "computed": false
+      }
+    },
+    "onClick": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": ""
+    },
+    "onClickDone": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": ""
+    },
+    "iconSize": {
+      "defaultValue": {
+        "value": "'normal'",
+        "computed": false
+      },
+      "required": false
+    }
+  }
+}
