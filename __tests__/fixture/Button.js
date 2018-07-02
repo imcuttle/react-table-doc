@@ -4,17 +4,26 @@
  * @owner wujun07:2017-06-27
  *
  */
-import React, {Component} from 'react'
-import ReactDOM, {findDOMNode} from 'react-dom'
+import React, { Component } from 'react'
+import ReactDOM, { findDOMNode } from 'react-dom'
 import PropTypes from 'prop-types'
-import {h, c} from '@befe/utils/wrapper/erp'
-import {buffer, isCallable, noop} from '../../common/utils'
+import { h, c } from '@befe/utils/wrapper/erp'
+import { buffer, isCallable, noop } from '../../common/utils'
 
 import Icon from '@befe/erp-comps/v2/components/Icon'
 
 import style from './style.use.less'
 
-export const BUTTON_TYPE_LIST = ['default', 'primary', 'normal', 'success', 'danger', 'pale', 'bare', 'link']
+export const BUTTON_TYPE_LIST = [
+  'default',
+  'primary',
+  'normal',
+  'success',
+  'danger',
+  'pale',
+  'bare',
+  'link'
+]
 export const BUTTON_SIZE_LIST = ['default', 'small', 'large', 'x-small']
 export const COMP_TYPE_BUTTON = 'button'
 
@@ -29,6 +38,7 @@ export default class Button extends Component {
 
     /**
      * 按钮类型类型 'default' | 'primary' | 'success' | 'danger' | 'normal' | 'pale'
+     * [hahha](mmp)
      * default: 'default'
      */
     type: PropTypes.oneOf(BUTTON_TYPE_LIST),
@@ -76,7 +86,7 @@ export default class Button extends Component {
      * 如果是async action模式，在onClick()返回的promise resolve后触发
      * () => console.log('done'),
      * */
-    onClickDone: PropTypes.func,
+    onClickDone: PropTypes.func
   }
 
   static defaultProps = {
@@ -86,7 +96,7 @@ export default class Button extends Component {
     icon: '',
     iconSize: 'normal',
     // loading: false,
-    loadingSpinDelayInMS: 300,
+    loadingSpinDelayInMS: 300
   }
 
   static compType = COMP_TYPE_BUTTON
@@ -120,12 +130,11 @@ export default class Button extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const {loading, loadingSpinDelayInMS} = nextProps
+    const { loading, loadingSpinDelayInMS } = nextProps
     if (loading !== undefined) {
       if (loading && loadingSpinDelayInMS) {
         this.showLoadingSpinTimer()
-      }
-      else {
+      } else {
         this.setShowLoading(!!loading)
         // this.showLoadingSpinTimer.clear()
         // this.setState({
@@ -137,16 +146,28 @@ export default class Button extends Component {
 
   render() {
     const {
-            classPrefix,   // pick out from props
-            style,
-            type, size, icon, iconSize, iconStyle, children, className, loading, loadingSpinDelayInMS,
-            onClick, onClickDone, disabled, title,
-            ...otherButtonNativeProps
-          } = this.props
+      classPrefix, // pick out from props
+      style,
+      type,
+      size,
+      icon,
+      iconSize,
+      iconStyle,
+      children,
+      className,
+      loading,
+      loadingSpinDelayInMS,
+      onClick,
+      onClickDone,
+      disabled,
+      title,
+      ...otherButtonNativeProps
+    } = this.props
 
     const compClass = this.compClass
 
-    return h.button({
+    return h.button(
+      {
         className: c(
           className,
           compClass,
@@ -163,21 +184,25 @@ export default class Button extends Component {
         // 不支持的在上面pick out
         ...otherButtonNativeProps
       },
-      h.span(`${compClass}-text`, {},
-        icon ? h(Icon, {
-          className: c(
-            `${compClass}-icon-font-prefix`,
-            !children && 'icon-font-prefix-only'
-          ),
-          name: icon,
-          size: iconSize || 'normal',
-          style: iconStyle
-        }) : null,
-        children,
+      h.span(
+        `${compClass}-text`,
+        {},
+        icon
+          ? h(Icon, {
+              className: c(
+                `${compClass}-icon-font-prefix`,
+                !children && 'icon-font-prefix-only'
+              ),
+              name: icon,
+              size: iconSize || 'normal',
+              style: iconStyle
+            })
+          : null,
+        children
       ),
       h(Icon, {
         className: `${compClass}-loading-icon`,
-        ref: domNode => this.loading = domNode,
+        ref: domNode => (this.loading = domNode),
         type: 'img',
         spin: 1,
         name: this.loadingIconName
@@ -186,8 +211,8 @@ export default class Button extends Component {
   }
 
   handleClick = e => {
-    const {disabled, loading, onClick, onClickDone} = this.props
-    const {asyncLoading} = this.state
+    const { disabled, loading, onClick, onClickDone } = this.props
+    const { asyncLoading } = this.state
     const onDone = isCallable(onClickDone) ? onClickDone : noop
     let ret = null
     if (!disabled && !loading && !asyncLoading && isCallable(onClick)) {
@@ -195,20 +220,22 @@ export default class Button extends Component {
       if (ret && ret.then) {
         this.setAsyncLoading(true)
         this.showLoadingSpinTimer()
-        ret.then(result => {
-          // this.setShowLoading(false)
-          // this.setAsyncLoading(false)
-          onDone(result)
-          this.setShowLoading(false)
-          this.setAsyncLoading(false)
-          return Promise.resolve(result)
-        }, error => {
-          this.setShowLoading(false)
-          this.setAsyncLoading(false)
-          return Promise.reject(error)
-        })
-      }
-      else {
+        ret.then(
+          result => {
+            // this.setShowLoading(false)
+            // this.setAsyncLoading(false)
+            onDone(result)
+            this.setShowLoading(false)
+            this.setAsyncLoading(false)
+            return Promise.resolve(result)
+          },
+          error => {
+            this.setShowLoading(false)
+            this.setAsyncLoading(false)
+            return Promise.reject(error)
+          }
+        )
+      } else {
         onDone()
       }
     }
@@ -220,8 +247,10 @@ export default class Button extends Component {
     const btnRect = domNodeBtn.getBoundingClientRect()
     const borderWidth = 1
     const iconSize = 16
-    domNodeLoading.style.left = (btnRect.width - iconSize) / 2 - borderWidth + 'px'
-    domNodeLoading.style.top = (btnRect.height - iconSize) / 2 - borderWidth + 'px'
+    domNodeLoading.style.left =
+      (btnRect.width - iconSize) / 2 - borderWidth + 'px'
+    domNodeLoading.style.top =
+      (btnRect.height - iconSize) / 2 - borderWidth + 'px'
   }
 
   setAsyncLoading(loading) {
@@ -237,11 +266,18 @@ export default class Button extends Component {
     })
   }
 
+  /**
+   * llalal
+   * @public
+   * @return {string}
+   */
   get compClass() {
     return `${this.props.classPrefix}-btn`
   }
 
   get loadingIconName() {
-    return ['primary', 'success', 'danger'].includes(this.props.type) ? 'dot-spin-loading-white' : 'dot-spin-loading'
+    return ['primary', 'success', 'danger'].includes(this.props.type)
+      ? 'dot-spin-loading-white'
+      : 'dot-spin-loading'
   }
 }

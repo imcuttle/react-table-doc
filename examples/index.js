@@ -9,9 +9,12 @@ import { render } from 'react-dom'
 import TableDoc from '../'
 import '../lib/style.css'
 
+const data = require('!../loader!../__tests__/fixture/Button.js')
+console.log(data)
+
 render(
   <div>
-    <TableDoc data={require('../__tests__/fixture/button.json')} />
+    <TableDoc data={data} />
   </div>,
   window.root
 )

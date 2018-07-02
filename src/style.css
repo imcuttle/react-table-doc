@@ -1,4 +1,63 @@
 .react-table-doc-container {
   border: 1px solid rebeccapurple;
 }
+.react-table-doc-td-prop-key-name,
+.react-table-doc-td-prop-key-type {
+  font-size: 1rem;
+}
+.react-table-doc-td-prop-key-name code,
+.react-table-doc-td-prop-key-type code {
+  font-family: Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: inherit;
+  color: inherit;
+  background: transparent;
+  white-space: inherit;
+}
+.react-table-doc-td-prop-key-name {
+  color: #7f9a44;
+}
+.react-table-doc-td-prop-key-type {
+  color: #b77daa;
+}
+.react-table-doc-prop-type-append {
+  color: #a55c95;
+  display: inline-block;
+  padding: 0.8rem;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 1;
+}
+.react-table-doc-td-prop-key-description p {
+  margin: 0;
+}
+.react-table-doc-table-wrapper table {
+  border-collapse: collapse;
+}
+.react-table-doc-table-wrapper td {
+  vertical-align: top;
+}
+.react-table-doc-table-wrapper th {
+  padding-bottom: 0.6rem;
+  padding-right: 1.3rem;
+  text-align: left;
+}
+.react-table-doc-table-wrapper td {
+  padding: 0.55rem 1.3rem 0.55rem 0;
+}
+.react-table-doc-table-wrapper thead {
+  border-bottom: 1px #e8e8e8 solid;
+}
+.react-table-doc-prop-type-enum:hover .react-table-doc-prop-type-append {
+  position: absolute;
+  display: block;
+  left: 5px;
+  top: 5px;
+}
+.react-table-doc-td-prop-key-type {
+  position: relative;
+}
+.react-table-doc-prop-type-append {
+  display: none;
+}
 /*# sourceMappingURL=style.css.map */

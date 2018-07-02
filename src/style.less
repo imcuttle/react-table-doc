@@ -1,3 +1,78 @@
-.react-table-doc-container {
-  border: 1px solid rebeccapurple;
+@prefix: react-table-doc-;
+
+.@{prefix} {
+  &container {
+    border: 1px solid rebeccapurple;
+  }
+  &display-name {
+  }
+  &description {
+  }
+  &td-prop-key-name,
+  &td-prop-key-type {
+    font-size: 1rem;
+    code {
+      font-family: Consolas, 'Liberation Mono', Menlo, monospace;
+      font-size: inherit;
+      color: inherit;
+      background: transparent;
+      white-space: inherit;
+    }
+  }
+  &td-prop-key-name {
+    color: #7f9a44;
+  }
+  &td-prop-key-type {
+    color: #b77daa;
+  }
+  &prop-type-append {
+    color: darken(#b77daa, 10%);
+
+    display: inline-block;
+    padding: 0.8rem;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    z-index: 1;
+  }
+  &td-prop-key-description {
+    p {
+      margin: 0;
+    }
+  }
+  &table-wrapper {
+    table {
+      border-collapse: collapse;
+    }
+    td {
+      vertical-align: top;
+    }
+    th {
+      padding-bottom: 0.6rem;
+      padding-right: 1.3rem;
+      text-align: left;
+    }
+    td {
+      padding: 0.55rem 1.3rem 0.55rem 0;
+    }
+    thead {
+      border-bottom: 1px #e8e8e8 solid;
+    }
+    thead tr {
+    }
+  }
+  &prop-type-enum {
+    &:hover .@{prefix}prop-type-append {
+      position: absolute;
+      display: block;
+      left: 5px;
+      top: 5px;
+    }
+  }
+  &td-prop-key-type {
+    position: relative;
+  }
+  &prop-type-append {
+    display: none;
+  }
 }
