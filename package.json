@@ -13,6 +13,9 @@
     "example": "gojs -i examples/index.js -p 9888",
     "prepare": "npm run build"
   },
+  "files": [
+    "lib/", "index.js", "loader/"
+  ],
   "keywords": [
     "react",
     "component",
