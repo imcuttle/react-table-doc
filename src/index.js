@@ -55,6 +55,16 @@ export default class TableDoc extends React.Component {
     hideMethods: false
   }
 
+  componentWillMount() {
+    i18n.setLanguage(this.props.lang)
+  }
+  componentWillReceiveProps(newProps) {
+    if (newProps.lang !== this.props.lang) {
+      i18n.setLanguage(newProps.lang)
+      this.forceUpdate()
+    }
+  }
+
   renderPropsThead() {
     const { data, order } = this.props
     return (
