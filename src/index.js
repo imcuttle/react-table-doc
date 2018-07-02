@@ -133,7 +133,7 @@ export default class TableDoc extends React.Component {
     const { className, data, hideMethods, hideProps, lang } = this.props
     return (
       <div className={cn(className, c('container', `lang-${lang}`))}>
-        <h1 className={c('display-name')}>{data.displayName}</h1>
+        <h2 className={c('display-name')}>{data.displayName}</h2>
         <div
           className={c('description')}
           dangerouslySetInnerHTML={{ __html: _marked.parse(data.description) }}
