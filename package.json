@@ -1,6 +1,6 @@
 {
   "name": "react-table-doc",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "index.js",
   "description": "The component about react component document view",
   "author": "imcuttle",
@@ -14,7 +14,9 @@
     "prepare": "npm run build"
   },
   "files": [
-    "lib/", "index.js", "loader/"
+    "lib/",
+    "index.js",
+    "loader/"
   ],
   "keywords": [
     "react",
