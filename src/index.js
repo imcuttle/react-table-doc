@@ -18,6 +18,19 @@ const cn = p('')
 export const i18n = _i18n
 export const marked = _marked
 
+function renderPureType(d) {
+  if (typeof d === 'string') {
+    return d
+  }
+  console.log('renderPureType', d)
+  switch (d.name) {
+    case 'custom':
+      return d.raw
+    default:
+      return d.value
+  }
+}
+
 function renderType(type) {
   if (!type) {
     return null
@@ -25,16 +38,34 @@ function renderType(type) {
   const { name, value } = type
   let append = null
   if (name === 'enum') {
-    append = (
-      <span className={c('prop-type-append')}>
-        {value.map(({ value }) => value).join('|')}
+    append = value.map(({ value }, i) => (
+      <span key={i}>
+        {i > 0 && <span>|</span>}
+        {renderPureType(value)}
       </span>
-    )
+    ))
+  } else if (name === 'arrayOf') {
+    append = renderPureType(value)
+  } else if (name === 'custom') {
+    append = type.raw
+  } else if (name === 'shape') {
+    const keys = Object.keys(value)
+    if (!!keys.length) {
+      append = (
+        <div>
+          {keys.map(key => (
+            <div key={key} className={c('prop-type-shape-each')}>
+              <code>{key}</code>: <code>{renderType(value[key])}</code>
+            </div>
+          ))}
+        </div>
+      )
+    }
   }
   return (
-    <span className={c(`prop-type-${name}`)}>
+    <span className={c(`prop-type prop-type-${name}`)}>
       <code>{name}</code>
-      {append}
+      {!!append && <span className={c('prop-type-append')}>{append}</span>}
     </span>
   )
 }
@@ -80,9 +111,17 @@ export default class TableDoc extends React.Component {
     )
   }
 
+  get hasProps() {
+    return (
+      !!this.props.data &&
+      !!this.props.data.props &&
+      !!Object.keys(this.props.data.props).length
+    )
+  }
+
   renderPropsTbody() {
     const {
-      data: { props },
+      data: { props = {} },
       order
     } = this.props
 
@@ -109,7 +148,9 @@ export default class TableDoc extends React.Component {
                     content = (
                       <span
                         dangerouslySetInnerHTML={{
-                          __html: val.description ? _marked.parse(val.description) : ''
+                          __html: val.description
+                            ? _marked.parse(val.description)
+                            : ''
                         }}
                       />
                     )
@@ -131,10 +172,12 @@ export default class TableDoc extends React.Component {
   renderPropsTable() {
     return (
       <div className={c('table-wrapper', 'table-props')}>
-        <table>
-          {this.renderPropsThead()}
-          {this.renderPropsTbody()}
-        </table>
+        {this.hasProps ? (
+          <table>
+            {this.renderPropsThead()}
+            {this.renderPropsTbody()}
+          </table>
+        ) : null}
       </div>
     )
   }

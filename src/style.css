@@ -45,11 +45,14 @@
 .react-table-doc-table-wrapper thead {
   border-bottom: 1px #e8e8e8 solid;
 }
-.react-table-doc-prop-type-enum:hover .react-table-doc-prop-type-append {
+.react-table-doc-prop-type:hover .react-table-doc-prop-type-append {
   position: absolute;
   display: block;
   left: 5px;
   top: 5px;
+}
+.react-table-doc-prop-type-shape-each {
+  white-space: nowrap;
 }
 .react-table-doc-td-prop-key-type {
   position: relative;

@@ -27,13 +27,24 @@ export const BUTTON_TYPE_LIST = [
 export const BUTTON_SIZE_LIST = ['default', 'small', 'large', 'x-small']
 export const COMP_TYPE_BUTTON = 'button'
 
+const shapeOf = PropTypes.shape({
+  foo: PropTypes.string
+})
+
 /**
- * 是多少 哈哈哈哈
+ * Write Some Description Here.
  * ### 666
  * - test
  */
 export default class Button extends Component {
   static propTypes = {
+    arrayOf: PropTypes.arrayOf(shapeOf),
+    oneOf: PropTypes.oneOf(['1', '2']),
+    shapeOf,
+    x: PropTypes.shape({
+      foo: PropTypes.string
+    }),
+
     classPrefix: PropTypes.string,
 
     /**
