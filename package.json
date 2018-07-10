@@ -11,6 +11,7 @@
     "build": "npm run build:less && rimraf lib && babel src -D -d lib",
     "dev": "npm run build -- -w",
     "example": "gojs -i examples/index.js -p 9888",
+    "example:build": "gojs -b examples/index.js",
     "prepare": "npm run build"
   },
   "files": [
