@@ -13,5 +13,6 @@ The react component for more prettier component document.
 
 ```javascript
 import TableDoc from 'react-table-doc'
+import 'react-table-doc/lib/style.css'
 <TableDoc data={require('!react-table-doc/loader!path/to/react/component')} />
 ```
