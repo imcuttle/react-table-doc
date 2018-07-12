@@ -18,34 +18,27 @@ const cn = p('')
 export const i18n = _i18n
 export const marked = _marked
 
-function renderPureType(d) {
-  if (typeof d === 'string') {
-    return d
-  }
-  console.log('renderPureType', d)
-  switch (d.name) {
-    case 'custom':
-      return d.raw
-    default:
-      return d.value
-  }
-}
-
-function renderType(type) {
+function renderTypeAppend(type) {
   if (!type) {
     return null
   }
+  if (typeof type === 'string') {
+    return type
+  }
+
   const { name, value } = type
   let append = null
-  if (name === 'enum') {
+  if (name === 'custom') {
+    append = type.raw
+  } else if (name === 'enum') {
     append = value.map(({ value }, i) => (
       <span key={i}>
         {i > 0 && <span>|</span>}
-        {renderPureType(value)}
+        {renderTypeAppend(value)}
       </span>
     ))
   } else if (name === 'arrayOf') {
-    append = renderPureType(value)
+    append = renderTypeAppend(value) || (value && value.name)
   } else if (name === 'custom') {
     append = type.raw
   } else if (name === 'shape') {
@@ -61,7 +54,22 @@ function renderType(type) {
         </div>
       )
     }
+  } else {
+    append = value
   }
+  return append
+}
+
+function renderType(type) {
+  if (!type) {
+    return null
+  }
+  if (typeof type === 'string') {
+    return type
+  }
+
+  const { name, value } = type
+  const append = renderTypeAppend(type)
   return (
     <span className={c(`prop-type prop-type-${name}`)}>
       <code>{name}</code>
