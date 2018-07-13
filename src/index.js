@@ -42,6 +42,10 @@ function renderTypeAppend(type) {
   } else if (name === 'custom') {
     append = type.raw
   } else if (name === 'shape') {
+    if (typeof value === 'string') {
+      return value
+    }
+
     const keys = Object.keys(value)
     if (!!keys.length) {
       append = (
