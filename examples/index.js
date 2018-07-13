@@ -10,7 +10,7 @@ import TableDoc from '../'
 import '../lib/style.css'
 
 const data = require('!../loader!../__tests__/fixture/Button.js')
-console.log('data', require('!../loader!../__tests__/fixture/DownloadList'))
+console.log('data', require('!../loader!../__tests__/fixture/Icon'))
 render(
   <div>
     <TableDoc data={data} />
@@ -18,6 +18,8 @@ render(
     <TableDoc data={require('!../loader!../__tests__/fixture/StatelessBtn')} />
     <hr/>
     <TableDoc data={require('!../loader!../__tests__/fixture/DownloadList')} />
+    <hr/>
+    <TableDoc data={require('!../loader!../__tests__/fixture/Icon')} />
   </div>,
   window.root
 )

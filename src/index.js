@@ -38,7 +38,7 @@ function renderTypeAppend(type) {
       </span>
     ))
   } else if (name === 'arrayOf') {
-    append = renderTypeAppend(value) || (value && value.name)
+    append = renderType(value) || (value && value.name)
   } else if (name === 'custom') {
     append = type.raw
   } else if (name === 'shape') {
@@ -54,6 +54,17 @@ function renderTypeAppend(type) {
         </div>
       )
     }
+  } else if (name === 'union') {
+    append = (
+      <div>
+        {value.map((x, i, { length }) => (
+          <span key={i} className={c('prop-type-unio-each')}>
+            {renderType(x)}
+            {i !== length - 1 && <span>|</span>}
+          </span>
+        ))}
+      </div>
+    )
   } else {
     append = value
   }
