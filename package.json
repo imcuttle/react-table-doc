@@ -12,7 +12,9 @@
     "dev": "npm run build -- -w",
     "example": "gojs -i examples/index.js -p 9888",
     "example:build": "gojs -b examples/index.js",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
+    "version": "npm run changelog"
   },
   "files": [
     "lib/",
@@ -39,6 +41,9 @@
     }
   },
   "devDependencies": {
+    "@commitlint/cli": "^7.1.1",
+    "@commitlint/config-conventional": "^7.1.1",
+    "@moyuyc/husky": "^1.0.0",
     "@types/jest": "^23.1.3",
     "babel-cli": "^6.26.0",
     "babel-jest": "^23.2.0",
@@ -48,20 +53,32 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
+    "conventional-changelog-cli": "^2.0.5",
     "go-js": "^1.3.12",
     "jest": "^23.2.0",
     "less": "^3.0.4",
-    "prefix-classname": "^1.0.1",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "rimraf": "^2.6.2"
   },
   "dependencies": {
+    "prefix-classname": "^1.0.1",
     "highlight.js": "^9.12.0",
     "loader-utils": "^1.1.0",
     "marked": "^0.4.0",
     "react-docgen": "^2.21.0",
     "tiny-i18n": "^1.1.0"
+  },
+  "husky": {
+    "installType": "append",
+    "hooks": {
+      "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
   }
 }
