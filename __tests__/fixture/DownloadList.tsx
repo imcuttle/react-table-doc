@@ -21,9 +21,12 @@ import DownloadSource from 'dulife-ui/DownloadSource';
 
 const c = p('du-page-download-list-')
 
-export default class DownloadList extends React.Component {
+export default class DownloadList extends React.Component<any, any> {
   static propTypes = {
     ...GridLayout.propTypes,
+    /**
+     * 渲染方法
+     */
     renderItem: PropTypes.any,
     list: PropTypes.arrayOf(
       PropTypes.string

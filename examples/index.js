@@ -17,7 +17,7 @@ render(
     <hr/>
     <TableDoc data={require('!../loader!../__tests__/fixture/StatelessBtn')} />
     <hr/>
-    <TableDoc data={require('!../loader!../__tests__/fixture/DownloadList')} />
+    <TableDoc data={require('!../loader!../__tests__/fixture/DownloadList.tsx')} />
     <hr/>
     <TableDoc data={require('!../loader!../__tests__/fixture/Icon')} />
   </div>,
