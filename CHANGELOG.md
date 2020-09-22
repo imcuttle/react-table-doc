@@ -1,3 +1,8 @@
+<a name="1.0.0"></a>
+# [1.0.0](https://github.com/imcuttle/react-table-doc/compare/v0.0.10...v1.0.0) (2020-09-22)
+
+
+
 <a name="0.0.10"></a>
 ## [0.0.10](https://github.com/imcuttle/react-table-doc/compare/v0.0.9...v0.0.10) (2018-08-31)
 
