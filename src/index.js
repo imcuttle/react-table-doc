@@ -26,7 +26,7 @@ function renderTypeAppend(type) {
     return type
   }
 
-  const { name, value } = type
+  const { name, value, raw } = type
   let append = null
   if (name === 'custom') {
     append = type.raw
@@ -58,7 +58,7 @@ function renderTypeAppend(type) {
         </div>
       )
     }
-  } else if (name === 'union') {
+  } else if (name === 'union' && Array.isArray(value)) {
     append = (
       <div>
         {value.map((x, i, { length }) => (
@@ -69,13 +69,15 @@ function renderTypeAppend(type) {
         ))}
       </div>
     )
+  } else if (name === 'union' && raw) {
+    append = <code className={c('raw')}>{raw}</code>
   } else {
     append = value
   }
   return append
 }
 
-function renderType(type) {
+function renderType(type, {useRaw = false} = {}) {
   if (!type) {
     return null
   }
@@ -83,8 +85,16 @@ function renderType(type) {
     return type
   }
 
-  const { name, value } = type
-  const append = renderTypeAppend(type)
+  let { name, value, raw } = type
+  let append = renderTypeAppend(type)
+
+  if (useRaw) {
+    if ((name === 'union' || name === 'custom') && raw) {
+      name = raw
+      append = null
+    }
+  }
+
   return (
     <span className={c(`prop-type prop-type-${name}`)}>
       <code>{name}</code>
@@ -99,13 +109,17 @@ export default class TableDoc extends React.Component {
     order: PropTypes.arrayOf(PropTypes.string),
     hideMethods: PropTypes.bool,
     hideProps: PropTypes.bool,
+    useRawType: PropTypes.bool,
+    hideDisplayName: PropTypes.bool,
     lang: PropTypes.string,
     data: PropTypes.object.isRequired
   }
   static defaultProps = {
+    useRawType: false,
     order: ['name', 'type', 'default', 'description'],
     lang: 'en-US',
     hideProps: false,
+    hideDisplayName: false,
     hideMethods: false
   }
 
@@ -145,6 +159,7 @@ export default class TableDoc extends React.Component {
   renderPropsTbody() {
     const {
       data: { props = {} },
+      useRawType,
       order
     } = this.props
 
@@ -162,7 +177,7 @@ export default class TableDoc extends React.Component {
                     content = <code>{key}</code>
                     break
                   case 'type':
-                    content = renderType(val.type)
+                    content = renderType(val.type || val.flowType, {useRaw: useRawType})
                     break
                   case 'default':
                     content = val.defaultValue && val.defaultValue.value
@@ -206,10 +221,10 @@ export default class TableDoc extends React.Component {
   }
 
   render() {
-    const { className, data, hideMethods, hideProps, lang } = this.props
+    const { className, data, hideDisplayName, hideMethods, hideProps, lang } = this.props
     return (
       <div className={cn(className, c('container', `lang-${lang}`))}>
-        <h2 className={c('display-name')}>{data.displayName}</h2>
+        {!hideDisplayName && <h2 className={c('display-name')}>{data.displayName}</h2>}
         <div
           className={c('description')}
           dangerouslySetInnerHTML={{ __html: _marked.parse(data.description) }}
